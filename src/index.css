@@ -132,9 +132,10 @@
   }
 
   .service-block {
-    @apply relative bg-white overflow-hidden transition-all duration-300
+    @apply relative bg-white transition-all duration-300
            shadow-[0_10px_60px_rgba(0,0,0,0.08)] border-t-4 border-transparent
            hover:border-golden hover:shadow-[0_10px_60px_rgba(0,0,0,0.12)];
+    overflow: visible;
   }
 
   .testimonial-card-dark {

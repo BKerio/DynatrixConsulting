@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Linkedin, Twitter, Facebook, ArrowRight } from 'lucide-react';
 import { companyInfo, navLinks } from '@/data/siteData';
+import logoImg from '@/assets/logo.png';
 
 export default function Footer() {
   const exploreLinks = navLinks.filter(l =>
@@ -49,13 +50,14 @@ export default function Footer() {
         <div className="container-custom py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div>
-              <Link to="/" className="flex items-center gap-3 mb-6">
-                <div className="w-11 h-11 bg-golden flex items-center justify-center">
-                  <span className="text-charcoal font-black text-lg">D</span>
-                </div>
-                <div>
-                  <span className="text-xl font-semibold text-white block">Dynatrix</span>
-                  <span className="text-[10px] text-golden font-medium tracking-[0.15em] uppercase">Consulting Ltd</span>
+              <Link to="/" className="inline-block mb-6 group" aria-label="Dynatrix Home">
+                <div className="bg-white/95 hover:bg-white transition-all duration-300 rounded-xl px-4 py-2 border border-white/10 shadow-lg inline-flex items-center justify-center">
+                  <img
+                    src={logoImg}
+                    draggable="false"
+                    alt="Dynatrix Logo"
+                    className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
                 </div>
               </Link>
               <p className="text-[#75767a] text-[15px] leading-[28px] mb-6">

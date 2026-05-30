@@ -1,85 +1,95 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Star, Quote } from 'lucide-react';
-import { clients, testimonials } from '@/data/siteData';
+import { Star, Quote, ArrowRight } from 'lucide-react';
+import { testimonials } from '@/data/siteData';
+import { clientageLogos } from '@/data/clientLogos';
 import CTABanner from '@/sections/CTABanner';
 import PageHero from '@/components/PageHero';
-import SectionTitle from '@/components/SectionTitle';
 
-gsap.registerPlugin(ScrollTrigger);
+function GoldBar() {
+  return <div className="h-2.5 sm:h-3 w-full bg-golden" aria-hidden="true" />;
+}
 
 export default function Clients() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.from('.client-card', {
-        opacity: 0, y: 30, stagger: 0.06, duration: 0.5,
-        scrollTrigger: { trigger: '.clients-grid', start: 'top 80%' },
-      });
-      gsap.from('.testimonial-card', {
-        opacity: 0, y: 30, stagger: 0.12, duration: 0.6,
-        scrollTrigger: { trigger: '.testimonials-grid', start: 'top 80%' },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={sectionRef}>
+    <div>
       <PageHero
         eyebrow="Our Clients"
         title="Trusted by Leading Organizations"
-        description="We are proud to partner with some of Africa's most respected organizations across diverse industries."
+        description="We are proud to partner with respected organizations across Africa."
       />
 
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <SectionTitle
-            eyebrow="Clientele"
-            title="Organizations We Work With"
-            description="From SACCOs and hospitals to government agencies and manufacturers."
-          />
+      {/* Clientage — matches business profile layout */}
+      <section className="bg-white">
+        <GoldBar />
 
-          <div className="clients-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-[30px]">
-            {clients.map((client) => (
-              <div key={client.name} className="client-card p-6 bg-[#f8f6f1] border border-[#e1e2e7] text-center hover:border-golden transition-colors">
-                <div className="w-14 h-14 bg-golden/20 flex items-center justify-center mx-auto mb-4 text-charcoal font-bold text-xl">
-                  {client.name.charAt(0)}
-                </div>
-                <div className="font-semibold text-charcoal text-[15px]">{client.name}</div>
-                <div className="text-[12px] uppercase tracking-[0.08em] text-[#6f7174] mt-1">{client.industry}</div>
-              </div>
+        <div className="container-custom px-6 sm:px-10 py-14 sm:py-20 lg:py-24">
+          <h2 className="text-center text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#EE6A35] tracking-tight mb-12 sm:mb-16 lg:mb-20">
+            Some of Our Clientage
+          </h2>
+
+          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-10 sm:gap-x-12 sm:gap-y-12 lg:gap-x-16 lg:gap-y-14 max-w-6xl mx-auto list-none p-0 m-0">
+            {clientageLogos.map((client) => (
+              <li
+                key={client.name}
+                className="flex items-center justify-center w-[140px] sm:w-[160px] lg:w-[180px] min-h-[72px] sm:min-h-[80px]"
+              >
+                <img
+                  src={client.logo}
+                  draggable="false"
+                  alt={client.name}
+                  title={client.name}
+                  className="max-h-14 sm:max-h-16 lg:max-h-[72px] w-full max-w-full object-contain"
+                  loading="lazy"
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
+
+        <GoldBar />
       </section>
 
-      <section className="section-padding bg-[#f2f3f6]">
+      {/* Testimonials */}
+      <section className="section-padding bg-[#f8f6f1]">
         <div className="container-custom">
-          <SectionTitle eyebrow="Testimonials" title="What Our Clients Say" />
+          <p className="sec-subtitle text-center mb-2">Testimonials</p>
+          <h3 className="sec-title text-center mb-12">What Our Clients Say</h3>
 
-          <div className="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-[30px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px]">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial-card bg-charcoal p-8 relative">
-                <Quote className="w-8 h-8 text-golden mb-4 opacity-60" />
+              <article
+                key={testimonial.id}
+                className="bg-charcoal p-8 relative"
+              >
+                <Quote className="w-7 h-7 text-golden mb-4 opacity-70" />
                 <div className="flex items-center gap-1 mb-4">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-golden text-golden" />
                   ))}
                 </div>
-                <blockquote className="text-white/85 text-[15px] leading-[28px] mb-6 line-clamp-5">
+                <blockquote className="text-white/85 text-[15px] leading-[28px] mb-6">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
                 <div className="pt-4 border-t border-white/10">
-                  <div className="font-semibold text-white text-[15px]">{testimonial.author}</div>
-                  <div className="text-[11px] uppercase tracking-[0.1em] text-golden mt-1">{testimonial.title}, {testimonial.company}</div>
+                  <div className="font-semibold text-white">{testimonial.author}</div>
+                  <div className="text-[11px] uppercase tracking-[0.1em] text-golden mt-1">
+                    {testimonial.title}, {testimonial.company}
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-14 bg-charcoal text-center">
+        <div className="container-custom">
+          <p className="text-[12px] uppercase tracking-[0.15em] text-golden mb-3">Join Our Client Portfolio</p>
+          <h3 className="text-2xl font-semibold text-white mb-6">Ready to Transform Your Business?</h3>
+          <a href="/contact" className="btn-theme inline-flex">
+            <span className="relative z-10 flex items-center gap-2">
+              Get Started <ArrowRight className="w-4 h-4" />
+            </span>
+          </a>
         </div>
       </section>
 

@@ -1,15 +1,9 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Globe, Handshake, TrendingUp, Settings } from 'lucide-react';
-import { whyChooseUs, companyInfo } from '../data/siteData';
-import SectionTitle from '@/components/SectionTitle';
+import { Award, Sliders, Handshake, Box } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const iconMap: Record<string, React.ElementType> = {
-  Globe, Handshake, TrendingUp, Settings,
-};
 
 export default function WhyDynatrix() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -17,56 +11,130 @@ export default function WhyDynatrix() {
   useEffect(() => {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
-      gsap.from('.why-card', {
-        opacity: 0, y: 40, stagger: 0.12, duration: 0.7,
-        scrollTrigger: { trigger: '.why-grid', start: 'top 80%' },
+      gsap.from('.why-title', {
+        opacity: 0,
+        x: -30,
+        duration: 0.6,
+        scrollTrigger: { trigger: '.why-title', start: 'top 85%' },
       });
-      gsap.from('.why-image', {
-        opacity: 0, x: 50, duration: 0.8,
-        scrollTrigger: { trigger: '.why-image', start: 'top 80%' },
+      gsap.from('.why-item', {
+        opacity: 0,
+        y: 30,
+        stagger: 0.1,
+        duration: 0.6,
+        scrollTrigger: { trigger: '.why-items-container', start: 'top 85%' },
+      });
+      gsap.from('.why-right-item', {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        scrollTrigger: { trigger: '.why-right-item', start: 'top 85%' },
+      });
+      gsap.from('.why-person-img', {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.7,
+        scrollTrigger: { trigger: '.why-person-img', start: 'top 80%' },
       });
     }, sectionRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-padding bg-[#f2f3f6] overflow-hidden">
-      <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div>
-            <SectionTitle
-              align="left"
-              eyebrow="Why Choose Us"
-              title="Building a Design Easy for Business"
-              description={`${companyInfo.shortName} brings the latest business innovation into the digital world with top quality technology solutions tailored for African markets.`}
-              className="mb-10"
-            />
+    <div ref={sectionRef} className="relative">
+      {/* Top Gold Border */}
+      <div className="w-full h-6 bg-[#fec63f]" />
 
-            <div className="why-grid grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {whyChooseUs.map((item) => {
-                const Icon = iconMap[item.icon] || Globe;
-                return (
-                  <div key={item.title} className="why-card group text-center sm:text-left">
-                    <div className="why-icon-circle mx-auto sm:mx-0 mb-5">
-                      <Icon className="w-7 h-7 text-golden group-hover:text-golden transition-colors" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-charcoal mb-2">{item.title}</h3>
-                    <p className="text-[14px] leading-[26px] text-[#6f7174]">{item.description}</p>
+      <section className="py-20 lg:py-24 bg-white overflow-hidden">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            
+            {/* Left Column */}
+            <div className="why-items-container space-y-12">
+              <h2 className="why-title text-4xl sm:text-5xl font-bold text-[#ff5f38] tracking-tight">
+                Why us?
+              </h2>
+
+              {/* Item 1 */}
+              <div className="why-item group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-golden flex items-center justify-center text-charcoal shadow-md transition-all duration-300 group-hover:scale-105">
+                    <Award className="w-6 h-6" />
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                  <h3 className="text-xl font-bold text-charcoal">
+                    Expertise & Insights in the African Market
+                  </h3>
+                </div>
+                <p className="text-[15px] leading-[26px] text-charcoal/80 text-center max-w-lg md:text-left md:pl-18">
+                  We have a wealth of expertise and insights in the African market with decades of experience and a deep understanding of industry best practices.
+                </p>
+              </div>
 
-          <div className="why-image relative">
-            <img src="/about-team.jpg" alt="Dynatrix team" className="w-full h-auto object-cover shadow-[0_10px_60px_rgba(0,0,0,0.12)]" />
-            <div className="absolute bottom-8 left-8 right-8 bg-charcoal/90 text-white p-6 backdrop-blur-sm">
-              <p className="text-[15px] leading-[28px] text-white/80">{companyInfo.tagline}</p>
-              <p className="text-golden font-semibold mt-2 text-sm uppercase tracking-[0.1em]">{companyInfo.shortName}</p>
+              {/* Item 2 */}
+              <div className="why-item group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-golden flex items-center justify-center text-charcoal shadow-md transition-all duration-300 group-hover:scale-105">
+                    <Sliders className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-charcoal">
+                    Strategic Partnerships
+                  </h3>
+                </div>
+                <p className="text-[15px] leading-[26px] text-charcoal/80 text-center max-w-lg md:text-left md:pl-18">
+                  We value strategic partnerships and work hard to build strong relationships with our clients, based on trust, collaboration, and a shared commitment to success.
+                </p>
+              </div>
+
+              {/* Item 3 */}
+              <div className="why-item group">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-golden flex items-center justify-center text-charcoal shadow-md transition-all duration-300 group-hover:scale-105">
+                    <Handshake className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-charcoal">
+                    Scalability & Flexibility
+                  </h3>
+                </div>
+                <p className="text-[15px] leading-[26px] text-charcoal/80 text-center max-w-lg md:text-left md:pl-18">
+                  Whether you are a small startup or a large corporation, we have services that can be scaled to fit your needs. We are committed to adapting to your growth, providing you with the support you need to achieve your organizational goals.
+                </p>
+              </div>
             </div>
+
+            {/* Right Column */}
+            <div className="space-y-12 lg:pt-16 flex flex-col items-stretch lg:items-end">
+              {/* Item 4 */}
+              <div className="why-right-item group w-full">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-golden flex items-center justify-center text-charcoal shadow-md transition-all duration-300 group-hover:scale-105">
+                    <Box className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-charcoal">
+                    Customized Solutions
+                  </h3>
+                </div>
+                <p className="text-[15px] leading-[26px] text-charcoal/80 text-center max-w-lg md:text-left md:pl-18">
+                  We work closely with our clients to understand their business objectives, and develop solutions that help them achieve their objectives.
+                </p>
+              </div>
+
+              {/* Person Image */}
+              <div className="why-person-img relative mt-8 overflow-hidden rounded-3xl border border-[#e1e2e7] shadow-lg max-w-[480px] w-full self-center lg:self-end">
+                <img 
+                  src="/why-us-woman.png" 
+                  draggable="false"
+                  alt="Dynatrix Consulting Specialist" 
+                  className="w-full h-auto object-cover hover:scale-102 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Bottom Gold Border */}
+      <div className="w-full h-6 bg-[#fec63f]" />
+    </div>
   );
 }

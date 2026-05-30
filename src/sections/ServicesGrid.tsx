@@ -1,70 +1,93 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Lightbulb, Cpu, Cloud, Shield, Database, Code, ArrowRight } from 'lucide-react';
 import { services } from '../data/siteData';
-import SectionTitle from '@/components/SectionTitle';
 import ThemeButton from '@/components/ThemeButton';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const iconMap: Record<string, React.ElementType> = {
   Lightbulb, Cpu, Cloud, Shield, Database, Code,
 };
 
+const serviceTaglines: Record<string, string> = {
+  'it-consulting': 'Strategic guidance',
+  'digital-transformation': 'Driving innovation',
+  'cloud-infrastructure': 'Scalable infrastructure',
+  'cybersecurity': 'Proactive protection',
+  'erp-integration': 'Connected systems',
+  'software-development': 'Custom solutions',
+};
+
 export default function ServicesGrid() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.from('.service-block', {
-        opacity: 0, y: 50, stagger: 0.1, duration: 0.7,
-        scrollTrigger: { trigger: '.services-grid', start: 'top 80%' },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="section-padding bg-[#f8f6f1] relative">
-      <div className="container-custom">
-        <SectionTitle
-          eyebrow="Our Services"
-          title="Explore Our Top-Notch Professional Services"
-          description="From IT consulting to custom integrations — comprehensive technology services built for African enterprises."
-        />
+    <section className="section-padding bg-[#f4f6f9] relative overflow-hidden">
+      {/* Ekobyte-style soft background shapes */}
+      <div className="absolute top-20 left-0 w-72 h-72 bg-golden/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-charcoal/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
-        <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
-          {services.map((service) => {
+      <div className="container-custom relative z-10">
+        {/* Section header — Ekobyte "Latest service" pattern */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-3 mb-5">
+            <span className="w-10 sm:w-14 h-px bg-golden" aria-hidden="true" />
+            <span className="text-golden text-[13px] sm:text-sm font-semibold uppercase tracking-[0.15em]">
+              Latest service
+            </span>
+            <span className="w-10 sm:w-14 h-px bg-golden" aria-hidden="true" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold text-charcoal leading-[1.15] tracking-tight">
+            Explore Our Best Premium
+            <br className="hidden sm:block" />
+            {' '}Quality Service
+          </h2>
+        </div>
+
+        {/* Service cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {services.map((service, index) => {
             const Icon = iconMap[service.icon] || Lightbulb;
+            const tagline = serviceTaglines[service.id] ?? 'Expert delivery';
+
             return (
-              <div key={service.id} className="service-block group">
-                <div className="relative h-[280px] overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              <article
+                key={service.id}
+                className="group relative bg-white rounded-xl border border-[#e8ecf1] p-7 sm:p-8 shadow-[0_4px_24px_rgba(24,25,28,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(24,25,28,0.1)] hover:border-golden/40 overflow-hidden"
+              >
+                <span
+                  className="absolute top-5 right-6 text-5xl sm:text-6xl font-black text-charcoal/[0.04] leading-none select-none pointer-events-none"
+                  aria-hidden="true"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <div className="relative w-[72px] h-[72px] mb-6">
+                  <div
+                    className="absolute inset-0 rounded-2xl bg-golden/15 rotate-6 group-hover:rotate-12 transition-transform duration-300"
+                    aria-hidden="true"
                   />
-                  <div className="absolute inset-0 bg-charcoal/30 group-hover:bg-charcoal/50 transition-colors duration-300" />
-                  {/* Floating title strip */}
-                  <div className="absolute bottom-0 left-0 right-0 mx-4 -mb-6 bg-white shadow-[0_10px_60px_rgba(0,0,0,0.1)] p-5 pr-16 z-10">
-                    <h3 className="text-lg font-semibold text-charcoal">{service.title}</h3>
-                    <div className="absolute -top-8 right-4 w-16 h-16 bg-golden flex items-center justify-center shadow-lg">
-                      <Icon className="w-7 h-7 text-charcoal" />
-                    </div>
+                  <div className="relative w-full h-full rounded-2xl bg-[#f8f6f1] border border-[#ece9e0] flex items-center justify-center group-hover:bg-golden transition-colors duration-300">
+                    <Icon className="w-8 h-8 text-golden group-hover:text-charcoal transition-colors duration-300" strokeWidth={1.75} />
                   </div>
                 </div>
-                <div className="pt-12 px-6 pb-6">
-                  <p className="text-[15px] leading-[28px] text-[#6f7174] mb-4 line-clamp-3">
-                    {service.description}
-                  </p>
-                  <Link to={service.href || '/services'} className="inline-flex items-center text-charcoal font-semibold text-[14px] hover:text-golden transition-colors group/link">
-                    Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
+
+                <p className="text-golden text-[13px] font-semibold uppercase tracking-wider mb-2">
+                  {tagline}
+                </p>
+                <h3 className="text-xl font-bold text-charcoal mb-3 leading-snug group-hover:text-golden transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-[#6f7174] text-[15px] leading-[28px] mb-6 line-clamp-3">
+                  {service.description}
+                </p>
+
+                <Link
+                  to={service.href || '/services'}
+                  className="inline-flex items-center gap-2 text-charcoal font-semibold text-[13px] uppercase tracking-wider group/link hover:text-golden transition-colors"
+                >
+                  read more
+                  <span className="w-8 h-8 rounded-full bg-[#f4f6f9] border border-[#e8ecf1] flex items-center justify-center group-hover/link:bg-golden group-hover/link:border-golden transition-all duration-300">
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" />
+                  </span>
+                </Link>
+              </article>
             );
           })}
         </div>

@@ -110,6 +110,7 @@ export default function Navbar() {
           }`}>
             <img 
               src={logoImg} 
+              draggable="false"
               alt="Dynatrix Logo" 
               className={`object-contain transition-all duration-500 group-hover:scale-[1.02] ${
                 scrolled ? 'h-8 lg:h-9' : 'h-11 lg:h-12'
