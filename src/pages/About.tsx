@@ -1,17 +1,14 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Award, Heart, Zap, Star, Users, Target, Eye } from 'lucide-react';
-import { coreValues, companyInfo } from '@/data/siteData';
+import { Award } from 'lucide-react';
+import { companyInfo } from '@/data/siteData';
 import CTABanner from '@/sections/CTABanner';
 import PageHero from '@/components/PageHero';
 import SectionTitle from '@/components/SectionTitle';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const iconMap: Record<string, React.ElementType> = {
-  Award, Heart, Zap, Star, Users,
-};
 
 const visualValues = [
   {

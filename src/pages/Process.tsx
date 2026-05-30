@@ -1,6 +1,5 @@
 import { Search, PenTool, Truck, ClipboardCheck, RefreshCw } from 'lucide-react';
 import { processSteps } from '@/data/siteData';
-import { methodologyIntro } from '@/data/implementationLifecycle';
 import CTABanner from '@/sections/CTABanner';
 import PageHero from '@/components/PageHero';
 import SectionTitle from '@/components/SectionTitle';
