@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, LabelList } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { industryMarketShare } from '@/data/siteData';
 
 const RADIAN = Math.PI / 180;
