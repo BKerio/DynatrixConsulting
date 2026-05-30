@@ -398,7 +398,7 @@ export const companyInfo = {
   founded: '2021',
   address: 'Cassia Court Complex, Kiambere Road, Upperhill, Nairobi, Kenya',
   phone: '+254 735 295 050',
-  email: 'consulting@dynatrixa.co.ke',
+  email: 'consulting@dynatrix.co.ke',
   website: 'dynatrix.co.ke',
   hours: {
     weekday: 'Mon - Fri: 8:00am - 5:30pm',
