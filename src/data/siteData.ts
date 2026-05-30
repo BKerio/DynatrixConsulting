@@ -1,3 +1,41 @@
+import dynamicBC365Logo from '@/assets/Solutions/DynamicBC365.png';
+import dynamicCommerce365Logo from '@/assets/Solutions/DynamicCommerce365.png';
+import microsoft365Logo from '@/assets/Solutions/Microsoft365.png';
+import azureLogo from '@/assets/Solutions/Azure.png';
+import powerBILogo from '@/assets/Solutions/PowerBI.png';
+import odooSolutionLogo from '@/assets/Solutions/Odoo.png';
+import winmaxLogo from '@/assets/Solutions/Winmax.png';
+import zohoSolutionLogo from '@/assets/Solutions/Zoho.png';
+import sageSolutionLogo from '@/assets/Solutions/Sage.png';
+import seamlesshrSolutionLogo from '@/assets/Solutions/Seamlesshr.png';
+import workdayLogo from '@/assets/Solutions/Workaday.png';
+import bamboohrLogo from '@/assets/Solutions/Bamboohr.png';
+import fortinetSolutionLogo from '@/assets/Solutions/Fortinet.png';
+import ciscoSolutionLogo from '@/assets/Solutions/Cisco.png';
+import checkpointSolutionLogo from '@/assets/Solutions/Checkpoint.png';
+import forcepointSolutionLogo from '@/assets/Solutions/forcepoint.png';
+import zecurionSolutionLogo from '@/assets/Solutions/Zecurion.png';
+import awsSolutionLogo from '@/assets/Solutions/AWS.png';
+import huaweiCloudLogo from '@/assets/Solutions/Huawei-Cloud.png';
+import iforsLogo from '@/assets/Solutions/Ifors.png';
+import tableauLogo from '@/assets/Solutions/Tableau.png';
+import eBoardLogo from '@/assets/Solutions/e-Board.png';
+import microsoftTeamsLogo from '@/assets/Solutions/Microsoft-teams.png';
+import slackLogo from '@/assets/Solutions/Slack.png';
+import eazzyrentLogo from '@/assets/Solutions/Eazzyrent.png';
+import winguboxLogo from '@/assets/Solutions/Wingubox.png';
+
+export type SolutionProduct = {
+  name: string;
+  logo: string;
+};
+
+export type SolutionCategory = {
+  category: string;
+  icon: string;
+  items: SolutionProduct[];
+};
+
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
@@ -245,46 +283,82 @@ export const industryMarketShare = [
   { name: 'Retail', value: 8, color: '#FFC000' },
 ];
 
-export const solutions = [
+export const solutions: SolutionCategory[] = [
   {
     category: 'Microsoft Ecosystem',
-    items: ['Dynamics 365 Business Central', 'Dynamics 365 Commerce', 'Microsoft 365', 'Azure', 'Power BI'],
     icon: 'Monitor',
+    items: [
+      { name: 'Dynamics 365 Business Central', logo: dynamicBC365Logo },
+      { name: 'Dynamics 365 Commerce', logo: dynamicCommerce365Logo },
+      { name: 'Microsoft 365', logo: microsoft365Logo },
+      { name: 'Azure', logo: azureLogo },
+      { name: 'Power BI', logo: powerBILogo },
+    ],
   },
   {
     category: 'ERP & Business Apps',
-    items: ['ODOO', 'WinMax', 'Zoho', 'Sage Intacct'],
     icon: 'Database',
+    items: [
+      { name: 'ODOO', logo: odooSolutionLogo },
+      { name: 'WinMax', logo: winmaxLogo },
+      { name: 'Zoho', logo: zohoSolutionLogo },
+      { name: 'Sage Intacct', logo: sageSolutionLogo },
+    ],
   },
   {
     category: 'HR Tech',
-    items: ['SeamlessHR', 'Workday', 'BambooHR'],
     icon: 'Users',
+    items: [
+      { name: 'SeamlessHR', logo: seamlesshrSolutionLogo },
+      { name: 'Workday', logo: workdayLogo },
+      { name: 'BambooHR', logo: bamboohrLogo },
+    ],
   },
   {
     category: 'Cybersecurity',
-    items: ['Fortinet', 'Cisco', 'Check Point', 'Forcepoint', 'Zecurion'],
     icon: 'Shield',
+    items: [
+      { name: 'Fortinet', logo: fortinetSolutionLogo },
+      { name: 'Cisco', logo: ciscoSolutionLogo },
+      { name: 'Check Point', logo: checkpointSolutionLogo },
+      { name: 'Forcepoint', logo: forcepointSolutionLogo },
+      { name: 'Zecurion', logo: zecurionSolutionLogo },
+    ],
   },
   {
     category: 'Cloud & Infrastructure',
-    items: ['AWS', 'Microsoft Azure', 'Huawei Cloud'],
     icon: 'Cloud',
+    items: [
+      { name: 'AWS', logo: awsSolutionLogo },
+      { name: 'Microsoft Azure', logo: azureLogo },
+      { name: 'Huawei Cloud', logo: huaweiCloudLogo },
+    ],
   },
   {
     category: 'Data & BI',
-    items: ['Power BI', 'IFORS', 'Tableau'],
     icon: 'BarChart3',
+    items: [
+      { name: 'Power BI', logo: powerBILogo },
+      { name: 'IFORS', logo: iforsLogo },
+      { name: 'Tableau', logo: tableauLogo },
+    ],
   },
   {
     category: 'Collaboration',
-    items: ['eBoard Meetings', 'Microsoft Teams', 'Slack'],
     icon: 'MessageSquare',
+    items: [
+      { name: 'eBoard Meetings', logo: eBoardLogo },
+      { name: 'Microsoft Teams', logo: microsoftTeamsLogo },
+      { name: 'Slack', logo: slackLogo },
+    ],
   },
   {
     category: 'Fintech',
-    items: ['EazzyRent', 'Wingubox'],
     icon: 'CreditCard',
+    items: [
+      { name: 'EazzyRent', logo: eazzyrentLogo },
+      { name: 'Wingubox', logo: winguboxLogo },
+    ],
   },
 ];
 

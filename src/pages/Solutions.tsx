@@ -1,36 +1,20 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Monitor, Database, Users, Shield, Cloud, BarChart3, MessageSquare, CreditCard, Check } from 'lucide-react';
+import { Monitor, Database, Users, Shield, Cloud, BarChart3, MessageSquare, CreditCard } from 'lucide-react';
 import { solutions } from '@/data/siteData';
 import CTABanner from '@/sections/CTABanner';
 import PageHero from '@/components/PageHero';
-import SectionTitle from '@/components/SectionTitle';
-
-gsap.registerPlugin(ScrollTrigger);
+import EkobyteSectionHeader from '@/components/EkobyteSectionHeader';
 
 const iconMap: Record<string, React.ElementType> = {
   Monitor, Database, Users, Shield, Cloud, BarChart3, MessageSquare, CreditCard,
 };
 
+const allProducts = Array.from(
+  new Map(solutions.flatMap((s) => s.items).map((item) => [item.name, item])).values(),
+);
+
 export default function Solutions() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.from('.solution-card', {
-        opacity: 0, y: 40, stagger: 0.1, duration: 0.7,
-        scrollTrigger: { trigger: '.solutions-grid', start: 'top 80%' },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
-  const allProducts = solutions.flatMap(s => s.items);
-
   return (
-    <div ref={sectionRef}>
+    <div>
       <PageHero
         eyebrow="Our Solutions"
         title="Technology Partner Ecosystem"
@@ -39,50 +23,84 @@ export default function Solutions() {
 
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <SectionTitle
+          <EkobyteSectionHeader
             eyebrow="Partner Solutions"
-            title="Everything Your Business Needs"
+            title={
+              <>
+                Everything Your Business
+                <br className="hidden sm:block" />
+                {' '}Needs
+              </>
+            }
             description="One trusted partner for all your technology needs. We deliver integrated solutions across every layer of your stack."
           />
 
-          <div className="solutions-grid grid grid-cols-1 md:grid-cols-2 gap-[30px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {solutions.map((solution) => {
               const Icon = iconMap[solution.icon] || Monitor;
               return (
-                <div key={solution.category} className="solution-card bg-[#f8f6f1] p-8 border-t-4 border-transparent hover:border-golden transition-colors">
-                  <div className="flex items-start gap-5">
-                    <div className="w-16 h-16 bg-golden flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-7 h-7 text-charcoal" />
+                <article
+                  key={solution.category}
+                  className="group bg-[#f8f6f1] p-7 sm:p-8 border-t-4 border-transparent hover:border-golden transition-colors duration-300"
+                >
+                  <div className="flex items-start gap-5 mb-6">
+                    <div className="w-16 h-16 bg-golden flex items-center justify-center shrink-0">
+                      <Icon className="w-7 h-7 text-charcoal" strokeWidth={1.75} />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-charcoal mb-4">{solution.category}</h3>
-                      <ul className="space-y-2.5">
-                        {solution.items.map((item) => (
-                          <li key={item} className="flex items-center gap-3 text-[#6f7174] text-[15px]">
-                            <Check className="w-4 h-4 text-golden flex-shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <h3 className="text-xl font-bold text-charcoal pt-3 leading-snug">
+                      {solution.category}
+                    </h3>
                   </div>
-                </div>
+
+                  <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 list-none p-0 m-0">
+                    {solution.items.map((item) => (
+                      <li
+                        key={item.name}
+                        className="flex items-center justify-center p-3 sm:p-4 bg-white border border-[#e8ecf1] min-h-[72px] sm:min-h-[80px] hover:border-golden/60 transition-colors"
+                      >
+                        <img
+                          src={item.logo}
+                          alt={item.name}
+                          title={item.name}
+                          draggable="false"
+                          loading="lazy"
+                          className="max-h-10 sm:max-h-12 w-full max-w-[120px] object-contain"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-[#f2f3f6]">
+      <section className="section-padding bg-[#f4f6f9]">
         <div className="container-custom">
-          <SectionTitle eyebrow="Products" title="Products We Work With" description="Best-in-class software platforms we implement and support." />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <EkobyteSectionHeader
+            eyebrow="Products"
+            title="Products We Work With"
+            description="Best-in-class software platforms we implement and support."
+          />
+
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 list-none p-0 m-0">
             {allProducts.map((product) => (
-              <div key={product} className="flex items-center justify-center p-5 bg-white border border-[#e1e2e7] text-center min-h-[80px] hover:border-golden transition-colors">
-                <span className="text-[13px] font-semibold text-charcoal">{product}</span>
-              </div>
+              <li
+                key={product.name}
+                className="flex items-center justify-center p-4 sm:p-5 bg-white border border-[#e8ecf1] min-h-[80px] hover:border-golden transition-colors"
+              >
+                <img
+                  src={product.logo}
+                  alt={product.name}
+                  title={product.name}
+                  draggable="false"
+                  loading="lazy"
+                  className="max-h-10 sm:max-h-12 w-full max-w-[110px] object-contain"
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
