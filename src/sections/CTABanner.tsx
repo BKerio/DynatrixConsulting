@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Send, CheckCircle } from 'lucide-react';
-import { companyInfo } from '../data/siteData';
+import { Send, CheckCircle, Linkedin, Twitter, Facebook, MapPin } from 'lucide-react';
+import { companyInfo } from '@/data/siteData';
 import SectionTitle from '@/components/SectionTitle';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(companyInfo.address)}&hl=en&z=16&output=embed`;
 
 export default function CTABanner() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -32,7 +34,7 @@ export default function CTABanner() {
   return (
     <section ref={sectionRef} className="section-padding bg-white overflow-hidden">
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-0 cta-panel shadow-[0_10px_60px_rgba(0,0,0,0.08)]">
+        <div className="grid lg:grid-cols-2 gap-0 items-stretch cta-panel shadow-[0_10px_60px_rgba(0,0,0,0.08)]">
           {/* Form side */}
           <div className="bg-[#f8f6f1] p-8 sm:p-12 lg:p-14">
             <SectionTitle
@@ -82,14 +84,72 @@ export default function CTABanner() {
             )}
           </div>
 
-          {/* Image side */}
-          <div className="relative min-h-[400px] lg:min-h-0">
-            <img src="/service-consulting.jpg" alt="Contact Dynatrix" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-charcoal/50" />
-            <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 text-white">
-              <p className="text-[12px] uppercase tracking-[0.1em] text-golden mb-2">Contact</p>
-              <p className="text-2xl font-semibold mb-2">{companyInfo.phone}</p>
-              <p className="text-white/70 text-[15px]">{companyInfo.email}</p>
+          {/* Location + map side */}
+          <div className="bg-white p-8 sm:p-10 lg:p-12 flex flex-col h-full border-t lg:border-t-0 lg:border-l border-[#e8ecf1]">
+            <div className="flex items-center gap-3 shrink-0">
+              <a
+                href={companyInfo.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-[#d8dbe0] flex items-center justify-center text-[#8a8b90] hover:text-golden hover:border-golden/50 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a
+                href={companyInfo.social.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-[#d8dbe0] flex items-center justify-center text-[#8a8b90] hover:text-golden hover:border-golden/50 transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href={companyInfo.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-[#d8dbe0] flex items-center justify-center text-[#8a8b90] hover:text-golden hover:border-golden/50 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+            </div>
+
+            <h3 className="mt-5 text-xl sm:text-2xl font-bold text-charcoal shrink-0">Our Location</h3>
+
+            <div className="mt-3 flex-1 relative min-h-[200px] sm:min-h-[240px] rounded-xl border border-[#e1e2e7] bg-white p-2 shadow-[0_4px_24px_rgba(24,25,28,0.06)] overflow-hidden">
+              <iframe
+                title={`${companyInfo.shortName} office location`}
+                src={mapEmbedSrc}
+                className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] rounded-lg border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+            <div className="mt-3 shrink-0 flex items-start gap-2.5 text-[14px] leading-relaxed text-[#6f7174]">
+              <MapPin className="w-4 h-4 text-golden shrink-0 mt-0.5" strokeWidth={2} />
+              <p>{companyInfo.address}</p>
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-[#e8ecf1] shrink-0">
+              <p className="text-[11px] uppercase tracking-[0.15em] text-golden mb-2 font-medium">
+                Get in touch directly
+              </p>
+              <a
+                href={`tel:${companyInfo.phone.replace(/\s/g, '')}`}
+                className="block text-xl sm:text-2xl font-bold text-charcoal hover:text-golden transition-colors tracking-tight"
+              >
+                {companyInfo.phone}
+              </a>
+              <a
+                href={`mailto:${companyInfo.email}`}
+                className="block mt-1.5 text-[15px] text-[#6f7174] hover:text-golden transition-colors"
+              >
+                {companyInfo.email}
+              </a>
             </div>
           </div>
         </div>

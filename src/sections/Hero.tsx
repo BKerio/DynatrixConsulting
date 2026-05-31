@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { stats } from '../data/siteData';
+import { stats } from '@/data/siteData';
 
 const slides = [
   {

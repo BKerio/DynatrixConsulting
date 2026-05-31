@@ -212,7 +212,7 @@ export const testimonials = [
     title: 'CTO',
     company: 'Bolba SACCO',
     rating: 5,
-    image: '/about-team.jpg',
+    image: '/service-software.jpg',
     message: 'Dynatrix transformed our entire IT infrastructure. Their expertise in cloud migration and cybersecurity has been invaluable to our operations across Africa.',
     name: 'James Mwangi — CTO, Bolba SACCO',
   },
